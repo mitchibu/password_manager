@@ -13,6 +13,7 @@ import java.util.Set;
 public class MainActivity extends FlutterActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    setResult(RESULT_CANCELED);
     super.onCreate(savedInstanceState);
     GeneratedPluginRegistrant.registerWith(this);
 
@@ -23,9 +24,18 @@ public class MainActivity extends FlutterActivity {
         case "getIntent":
           result.success(onGetIntent());
           break;
+        case "finish":
+          onFinish(methodCall.arguments().toString());
+          break;
         }
       }
     });
+  }
+
+  private void onFinish(String text) {
+    Intent intent = new Intent().putExtra("replace_key", text);
+    setResult(RESULT_OK, intent);
+    finish();
   }
 
   private Map<String, Object> onGetIntent() {

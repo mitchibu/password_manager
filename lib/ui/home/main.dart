@@ -6,6 +6,7 @@ import 'package:password_manager/statefulmodel.dart';
 
 import '../../model.dart';
 import '../../repository/model.dart';
+import '../../test.dart';
 import '../common/paged_adapter.dart';
 import '../edit/main.dart';
 import 'model.dart';
@@ -141,7 +142,8 @@ class HomePage extends StatelessWidget {
         onTap: () async {
           if(StatefulModel.of<AppModel>(context).isMushroom) {
             await Clipboard.setData(ClipboardData(text: account.name));
-            Navigator.of(context).pop({'replace_key': account.password});
+            //Navigator.of(context).pop({'replace_key': account.password});
+            finish(account.password);
           } else {
             _editAccount(context, account: account);
           }
