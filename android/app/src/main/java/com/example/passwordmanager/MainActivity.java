@@ -45,12 +45,14 @@ public class MainActivity extends FlutterActivity {
     map.put("uri", intent.getDataString());
 
     Bundle bundle = intent.getExtras();
-    Map<String, Object> extras = new HashMap<>();
-    Set<String> keys = bundle.keySet();
-    for(String key : keys) {
-      extras.put(key, bundle.get(key));
+    if(bundle != null) {
+      Map<String, Object> extras = new HashMap<>();
+      Set<String> keys = bundle.keySet();
+      for(String key : keys) {
+        extras.put(key, bundle.get(key));
+      }
+      map.put("extras", extras);
     }
-    map.put("extras", extras);
     return map;
   }
 }
