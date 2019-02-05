@@ -4,9 +4,7 @@ import 'package:password_manager/statefulmodel.dart';
 import 'test.dart';
 
 class AppModel extends Model {
-  AppModel({this.intent, this.packageInfo}) {
-    print('uri: $intent');
-  }
+  AppModel({this.intent, this.packageInfo});
   final Intent intent;
   final PackageInfo packageInfo;
 
