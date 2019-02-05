@@ -20,9 +20,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   package_info: ^0.4.0
-  uni_links: ^0.1.4
   sqflite: ^1.0.0
-  dynamic_theme: ^1.0.0
   page_transition: ^1.0.0
   dao_generator_annotation:
     path: ../dao_generator/annotation

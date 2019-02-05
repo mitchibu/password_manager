@@ -1,6 +1,6 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:password_manager/statefulmodel.dart';
 
@@ -42,7 +42,6 @@ class HomePage extends StatelessWidget {
           title: Text('item1'),
           onTap: () {
 //            StatefulModel.of<AppModel>(context).setThemeData(ThemeData.light());
-//            DynamicTheme.of(context).setBrightness(Brightness.light);
             Navigator.of(context).pop();
           },
         ),
@@ -50,7 +49,6 @@ class HomePage extends StatelessWidget {
           title: Text('item2'),
           onTap: () {
 //            StatefulModel.of<AppModel>(context).setThemeData(ThemeData.dark());
-//            DynamicTheme.of(context).setBrightness(Brightness.dark);
             Navigator.pop(context);
           },
         ),
@@ -140,9 +138,13 @@ class HomePage extends StatelessWidget {
           ]
         ),
         subtitle: Text(account.name),
-        //onTap: () => _editAccount(context, account: account),
-        onTap: () {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text(StatefulModel.of<AppModel>(context).uri.toString())));
+        onTap: () async {
+          if(StatefulModel.of<AppModel>(context).isMushroom) {
+            await Clipboard.setData(ClipboardData(text: account.name));
+            Navigator.of(context).pop({'replace_key': account.password});
+          } else {
+            _editAccount(context, account: account);
+          }
         }
       ),
     );
@@ -150,7 +152,6 @@ class HomePage extends StatelessWidget {
 
   void _editAccount(BuildContext context, {AccountView account}) {
     Scaffold.of(context).hideCurrentSnackBar();
-//    Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditPage(account: account)));
     Navigator.of(context).push(PageTransition(type: PageTransitionType.rightToLeftWithFade, child: EditPage(account: account)));
   }
 }
